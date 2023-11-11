@@ -1,9 +1,9 @@
 data "azurerm_resource_group" "existing" {
-  name = "rg-${var.customer_name}"
+  name = "${var.customer_name}-${var.environment}-rg"
 }
 
 resource "azurerm_resource_group" "new" {
   count    = length(data.azurerm_resource_group.existing.id) > 0 ? 0 : 1
-  name     = "rg-${var.customer_name}"
+  name     = "${var.customer_name}-${var.environment}-rg"
   location = var.resource_group_location
 }

@@ -2,11 +2,9 @@
 aks cluster demo for terraform
 
 ## How to use this template
-All values that require configuration can be viewed inside variable.tf
+1. create a ressource group in azure subscription following the naming convention ${customer_name}-${environment}-rg in switzerlandnorth region.
 
-!! check is done for prexisting ressource group !!
-
-when executing this terraform script you will be prompted to provide values for following variables
+2. when executing this terraform script you will be prompted to provide values for following variables - use the same as used when creating the ressource group.
 - customer_name
 - cluster_name 
 - environment (tst/int/prd)

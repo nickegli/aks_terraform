@@ -1,7 +1,7 @@
 resource "azurerm_kubernetes_cluster" "k8s" {
   location            = length(data.azurerm_resource_group.existing.id) > 0 ? data.azurerm_resource_group.existing.location : azurerm_resource_group.new[0].location
   name                = "${var.customer_name}-${var.environment}-${var.cluster_name}"
-  resource_group_name = "${var.customer_name}-${length(data.azurerm_resource_group.existing.id) > 0 ? data.azurerm_resource_group.existing.name : azurerm_resource_group.new[0].name}"
+  resource_group_name = "${length(data.azurerm_resource_group.existing.id) > 0 ? data.azurerm_resource_group.existing.name : azurerm_resource_group.new[0].name}"
   dns_prefix          = "tsk8s"
   identity {
     type = "SystemAssigned"
