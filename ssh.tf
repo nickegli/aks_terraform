@@ -12,6 +12,11 @@ resource "azapi_resource" "ssh_public_key" {
   name      = "ssh-${var.customer_name}-${var.environment}-${var.cluster_name}"
   location  = length(data.azurerm_resource_group.existing.id) > 0 ? data.azurerm_resource_group.existing.location : azurerm_resource_group.new[0].location
   parent_id = length(data.azurerm_resource_group.existing.id) > 0 ? data.azurerm_resource_group.existing.id : azurerm_resource_group.new[0].id
+
+  tags = {
+    environment = var.environment
+    customer    = var.customer_name
+  }
 }
 
 output "key_data" {

@@ -18,3 +18,22 @@ aks cluster demo for terraform
 1. run ```terraform init -upgrade``` to download all necessary plugins (-upgrade checks if any new versions are available)
 2. run ```terraform plan -out main.tfplan``` to see what changes will be applied
 3. run ```terraform apply main.tfplan``` to apply changes
+
+
+## Using the provisioned infrastructure
+!! as of now missing permissions to create role_assignment to allow aks cluster to pull images from registry !!
+
+### Pushing to the Container Registry
+To push a localy built image run the following commands
+1. docker login loginserver
+2. docker build . -t image:tag
+3. docker image tag image:tag login-server/registry/image:tag  
+4. docker push login-server/registry/image:tag    
+
+
+### Retrieving from Registry
+
+### Deploying Application to AKS Cluster
+ArgoCD?
+
+

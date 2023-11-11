@@ -8,7 +8,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   tags = {
-    Environment = var.environment
+    environment = var.environment
+    customer    = var.customer_name
   }
 
   default_node_pool {
@@ -27,4 +28,31 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     network_plugin    = "kubenet"
     load_balancer_sku = "standard"
   }
+
+    depends_on = [
+    azurerm_container_registry.acr
+  ]
+
 }
+
+
+resource "azurerm_container_registry" "acr" {
+  name                = "${var.customer_name}${var.environment}acr"
+  resource_group_name = "${length(data.azurerm_resource_group.existing.id) > 0 ? data.azurerm_resource_group.existing.name : azurerm_resource_group.new[0].name}"
+  location            = "${length(data.azurerm_resource_group.existing.id) > 0 ? data.azurerm_resource_group.existing.location : azurerm_resource_group.new[0].location}"
+  sku                 = "Basic"
+  admin_enabled       = false
+
+  tags = {
+    environment = var.environment
+    customer    = var.customer_name
+  }
+}
+
+#missing permission for user to crete role assignment
+# resource "azurerm_role_assignment" "AcrPull" {
+#  principal_id                     = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].object_id
+#  role_definition_name             = "AcrPull"
+#  scope                            = azurerm_container_registry.acr.id
+#  skip_service_principal_aad_check = true
+#}
