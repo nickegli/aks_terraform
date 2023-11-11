@@ -33,5 +33,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# further files to ignore
 .terraform.lock.hcl
 .DS_Store
+main.tfplan
