@@ -4,7 +4,9 @@ aks cluster demo for terraform
 ## How to use this template
 All values that require configuration can be viewed inside variable.tf
 
-!! check is done for prexisting ressource group - !!
+!! check is done for prexisting ressource group !!
+
+be sure to change the resource group and cluster name in variable.tf
 
 ## Connecting to Tenant and Subscription
 1. run ```az login``` and follow the on screen instructions
