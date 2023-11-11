@@ -4,10 +4,9 @@ variable "resource_group_location" {
   description = "Location of the resource group."
 }
 
-variable "resource_group_name" {
+variable "customer_name" {
   type        = string
-  default     = "rg-yanick"
-  description = "Name of the resource group."
+  description = "Name of the customer."
 }
 
 variable "msi_id" {
@@ -26,14 +25,12 @@ variable "vm_size" {
   type        = string
   description = "The size of the Virtual Machine."
   default     = "Standard_D2_v2"
-  
 }
 
 variable "vm_name" {
   type        = string
   description = "The name of the Virtual Machine."
   default     = "agentpool"
-  
 }
 
 variable "vm_node_count" {
@@ -44,12 +41,10 @@ variable "vm_node_count" {
 
 variable "cluster_name" {
   type        = string
-  description = "The name of the Kubernetes Cluster."
-  default     = "yanick-test-cluster"
+  description = "The name of the Kubernetes Cluster built from customer_name-environment-cluster_name."
 }
 
 variable "environment" {
   type        = string
-  description = "The environment name."
-  default     = "int"
+  description = "The environment (tst/int/prd)."
 }

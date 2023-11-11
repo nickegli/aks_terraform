@@ -6,7 +6,10 @@ All values that require configuration can be viewed inside variable.tf
 
 !! check is done for prexisting ressource group !!
 
-be sure to change the resource group and cluster name in variable.tf
+when executing this terraform script you will be prompted to provide values for following variables
+- customer_name
+- cluster_name 
+- environment (tst/int/prd)
 
 ## Connecting to Tenant and Subscription
 1. run ```az login``` and follow the on screen instructions
