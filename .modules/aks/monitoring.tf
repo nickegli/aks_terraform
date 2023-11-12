@@ -24,14 +24,13 @@ resource "helm_release" "grafana" {
 
   set {
     name  = "adminPassword"
-    value = "admin1234"
+    value = var.monitoring_grafana_password
   }
 
   depends_on = [kubernetes_namespace.monitoring]
 }
 
 provider "kubernetes" {
-  # Configuration for the Kubernetes provider
   host                   = azurerm_kubernetes_cluster.k8s.kube_config.0.host
   client_certificate     = base64decode(azurerm_kubernetes_cluster.k8s.kube_config.0.client_certificate)
   client_key             = base64decode(azurerm_kubernetes_cluster.k8s.kube_config.0.client_key)

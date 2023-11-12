@@ -48,3 +48,8 @@ variable "customer_name" {
   type        = string
   description = "Name of the customer."
 }
+
+variable "monitoring_grafana_password" {
+  type        = string
+  description = "Password for Grafana."
+}
