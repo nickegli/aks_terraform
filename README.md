@@ -2,7 +2,7 @@
 aks cluster demo for terraform
 
 ## How to use this template
-2. when executing this terraform script you will be prompted to provide values for following variables.
+2. when executing this terraform script be sure to configure these values in variable.tf
 - customer_name
 - cluster_name 
 - short_name
@@ -48,6 +48,7 @@ How to solve imutability issue with terraform?
 | ACR | can docker login to Acr  | yes |
 | ACR | can images be pushed to Acr  | yes |
 | ACR | does communication run through internal network | needs to be tested |
+| FW | do set rules work  | needs to be tested |
 
 
 

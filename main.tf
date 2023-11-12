@@ -1,7 +1,17 @@
+resource "azurerm_resource_group" "aks_group" {
+  name     = "${var.service_short_name}-aks-${var.environment}-rg"
+  location = var.resource_group_location
+
+  tags = {
+    environment = var.environment
+    customer    = var.customer_name
+  }
+}
+
 resource "azurerm_kubernetes_cluster" "k8s" {
   name                = "${var.customer_name}-${var.environment}-${var.cluster_name}"
   location            = azurerm_resource_group.aks_group.location
-  resource_group_name = "${var.service_short_name}-${var.environment}-rg"
+  resource_group_name = "${var.service_short_name}-aks-${var.environment}-rg"
   dns_prefix          = "tsk8s"
 
   identity {
@@ -42,12 +52,22 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 
 }
 
+resource "azurerm_resource_group" "acr_group" {
+  name     = "${var.service_short_name}-acr-${var.environment}-rg"
+  location = var.resource_group_location
+
+  tags = {
+    environment = var.environment
+    customer    = var.customer_name
+  }
+}
+
 resource "azurerm_container_registry" "acr" {
   name                = "${var.customer_name}${var.environment}acr"
   resource_group_name = "${var.service_short_name}-acr-${var.environment}-rg"
   location            = "${var.resource_group_location}"
   sku                 = "Premium" #required for geo-replication / private link
-  #ublic_network_access_enabled = false # needs to be activated later so only accessible through bastion or vpn
+  #public_network_access_enabled = false # needs to be activated later so only accessible through bastion or vpn
   admin_enabled       = false # need to find a way to permanently prevent activation of admin user
 
   tags = {
@@ -79,50 +99,22 @@ resource "azurerm_private_endpoint" "acr_private_endpoint" {
   }
 }
 
-resource "azurerm_virtual_network" "cluster_vnet" {
-  name                = "clusterVnet"
-  address_space       = ["10.0.0.0/16"]
-  location            = var.resource_group_location
-  resource_group_name = "${var.service_short_name}-acr-${var.environment}-rg"
+# resource "azurerm_network_interface" "aks_nic" {
+#   name                = "aksNic"
+#   location            = var.resource_group_location
+#   resource_group_name = "${var.service_short_name}-aks-${var.environment}-rg"
 
-  tags = {
-    environment = var.environment
-    customer    = var.customer_name
-  }
-}
+#   ip_configuration {
+#     name                          = "internal"
+#     subnet_id                     = azurerm_subnet.aks_subnet.id
+#     private_ip_address_allocation = "Dynamic"
+#   }
 
-# Subnet for AKS
-resource "azurerm_subnet" "aks_subnet" {
-  name                 = "aksSubnet"
-  resource_group_name  = "${var.service_short_name}-acr-${var.environment}-rg"
-  virtual_network_name = azurerm_virtual_network.cluster_vnet.name
-  address_prefixes     = ["10.0.1.0/24"]
-}
-
-resource "azurerm_subnet" "acr_subnet" {
-  name                 = "acrSubnet"
-  resource_group_name  = "${var.service_short_name}-acr-${var.environment}-rg"
-  virtual_network_name = azurerm_virtual_network.cluster_vnet.name
-  address_prefixes     = ["10.0.2.0/24"]
-}
-
-# Example Resource in Subnet 1
-resource "azurerm_network_interface" "aks_nic" {
-  name                = "aksNic"
-  location            = var.resource_group_location
-  resource_group_name = "${var.service_short_name}-${var.environment}-rg"
-
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = azurerm_subnet.aks_subnet.id
-    private_ip_address_allocation = "Dynamic"
-  }
-
-  tags = {
-    environment = var.environment
-    customer    = var.customer_name
-  }
-}
+#   tags = {
+#     environment = var.environment
+#     customer    = var.customer_name
+#   }
+# }
 
 # resource "azurerm_private_dns_zone" "acr" {
 #   name                = "privatelink.azurecr.io"

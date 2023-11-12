@@ -1,7 +1,8 @@
 output "resource_group_name" {
   value = ["${azurerm_resource_group.aks_group.name}", 
            "${azurerm_resource_group.acr_group.name}", 
-           "${azurerm_resource_group.ssh_group.name}"]
+           "${azurerm_resource_group.ssh_group.name}",
+           "${azurerm_resource_group.nt_group.name}"]
 }
 
 output "kubernetes_cluster_name" {
