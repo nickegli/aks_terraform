@@ -48,3 +48,8 @@ variable "environment" {
   type        = string
   description = "The environment (tst/int/prd)."
 }
+
+variable "service_short_name" {
+  type        = string
+  description = "The short name of the service."
+}
