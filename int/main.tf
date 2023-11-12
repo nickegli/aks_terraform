@@ -1,5 +1,5 @@
 module "aks_cluster" {
-    source= "../modules/aks"
+    source= "../.modules/aks"
 
     cluster_name = "cluster1"
     environment = var.env
@@ -9,7 +9,7 @@ module "aks_cluster" {
 }
 
 module "acr" {
-    source= "../modules/acr"
+    source= "../.modules/acr"
 
     environment = var.env
     service_short_name = "y"
