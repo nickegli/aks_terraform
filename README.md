@@ -47,7 +47,6 @@ How to solve imutability issue with terraform?
 | AKS | can images be pulled from Acr | no lacking permission to create azurerm_role_assignment might need image pull secret in k8s|
 | ACR | can docker login to Acr  | yes |
 | ACR | can images be pushed to Acr  | yes |
-| ACR | can images be retrieved from Acr  | yes |
 | ACR | does communication run through internal network | needs to be tested |
 
 

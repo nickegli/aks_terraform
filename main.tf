@@ -37,8 +37,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   depends_on = [
-    azurerm_container_registry.acr,
-    azurerm_azurerm_resource_group.aks_group
+    azurerm_container_registry.acr
   ]
 
 }

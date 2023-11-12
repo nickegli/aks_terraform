@@ -27,3 +27,13 @@ resource "azurerm_resource_group" "ssh_group" {
     customer    = var.customer_name
   }
 }
+
+resource "azurerm_resource_group" "fw_group" {
+  name     = "${var.service_short_name}-fw-${var.environment}-rg"
+  location = var.resource_group_location
+
+  tags = {
+    environment = var.environment
+    customer    = var.customer_name
+  }
+}
