@@ -5,6 +5,7 @@ module "aks_cluster" {
     environment = var.env
     service_short_name = "y"
     customer_name = "yanick"
+    monitoring_grafana_password = "admin1234"
 
 }
 
