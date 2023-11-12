@@ -2,11 +2,10 @@
 aks cluster demo for terraform
 
 ## How to use this template
-1. create a ressource group in azure subscription following the naming convention ${customer_name}-${environment}-rg in switzerlandnorth region.
-
-2. when executing this terraform script you will be prompted to provide values for following variables - use the same as used when creating the ressource group.
+2. when executing this terraform script you will be prompted to provide values for following variables.
 - customer_name
 - cluster_name 
+- short_name
 - environment (tst/int/prd)
 
 ## Connecting to Tenant and Subscription
@@ -35,5 +34,23 @@ To push a localy built image run the following commands
 
 ### Deploying Application to AKS Cluster
 ArgoCD?
+
+How to solve imutability issue with terraform?
+
+
+## Testing
+
+|  Subject  | Description  |yes/no |
+|:----------|:-------------|:------|
+| AKS | can connection be established through kubeconfig | yes |
+| AKS | can internal dns resolution be run   | yes |
+| AKS | can images be pulled from Acr | no lacking permission to create azurerm_role_assignment might need image pull secret in k8s|
+| ACR | can docker login to Acr  | yes |
+| ACR | can images be pushed to Acr  | yes |
+| ACR | can images be retrieved from Acr  | yes |
+| ACR | does communication run through internal network | needs to be tested |
+
+
+
 
 
