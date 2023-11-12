@@ -4,12 +4,6 @@ variable "resource_group_location" {
   description = "Location of the resource group."
 }
 
-variable "msi_id" {
-  type        = string
-  description = "The Managed Service Identity ID. Set this value if you're running this example using Managed Identity as the authentication method."
-  default     = null
-}
-
 variable "username" {
   type        = string
   description = "The admin username for the new cluster."
@@ -38,23 +32,19 @@ variable "vm_node_count" {
 variable "cluster_name" {
   type        = string
   description = "The name of the Kubernetes Cluster built from customer_name-environment-cluster_name."
-  default = "cluster1"
 }
 
 variable "environment" {
   type        = string
   description = "The environment (tst/int/prd)."
-  default     = "int"
 }
 
 variable "service_short_name" {
   type        = string
   description = "The short name of the service."
-  default     = "y"
 }
 
 variable "customer_name" {
   type        = string
   description = "Name of the customer."
-  default     = "yanick"
 }

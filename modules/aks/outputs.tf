@@ -1,16 +1,5 @@
-output "resource_group_name" {
-  value = ["${azurerm_resource_group.aks_group.name}", 
-           "${azurerm_resource_group.acr_group.name}", 
-           "${azurerm_resource_group.ssh_group.name}",
-           "${azurerm_resource_group.nt_group.name}"]
-}
-
 output "kubernetes_cluster_name" {
   value = azurerm_kubernetes_cluster.k8s.name
-}
-
-output "container_registry_name" {
-  value = azurerm_container_registry.acr.name
 }
 
 output "client_certificate" {
@@ -46,4 +35,15 @@ output "host" {
 output "kube_config" {
   value     = azurerm_kubernetes_cluster.k8s.kube_config_raw
   sensitive = true
+}
+
+output "resource_group_name" {
+  value = ["${azurerm_resource_group.aks_group.name}", 
+           "${azurerm_resource_group.ssh_group.name}",
+           "${azurerm_resource_group.net_group.name}"]
+}
+
+output "acr_subnet_id" {
+  value       = azurerm_subnet.acr_subnet.id
+  description = "The ID of the ACR subnet"
 }
