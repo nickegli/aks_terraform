@@ -2,9 +2,9 @@
 aks cluster demo for terraform
 
 ## How to use this template
-2. when executing this terraform script be sure to configure these values in variable.tf
-- customer_name
+when executing this terraform script be sure to configure these values in the env.tf
 - cluster_name 
+- customer_name
 - short_name
 - environment (tst/int/prd)
 
