@@ -13,6 +13,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   location            = azurerm_resource_group.aks_group.location
   resource_group_name = "${var.service_short_name}-aks-${var.environment}-rg"
   dns_prefix          = "tsk8s"
+  kubernetes_version  = "1.26.6"
 
   identity {
     type = "SystemAssigned"
