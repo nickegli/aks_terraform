@@ -1,5 +1,5 @@
 # aks_terraform
-aks cluster demo for terraform
+aks cluster demo for terraform.
 
 ## How to use this template
 when executing this terraform script be sure to configure these values in the env.tf
