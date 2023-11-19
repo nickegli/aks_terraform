@@ -14,6 +14,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   resource_group_name = "${var.service_short_name}-aks-${var.environment}-rg"
   dns_prefix          = "tsk8s"
   kubernetes_version  = "1.26.6"
+  azure_policy_enabled = true
 
   identity {
     type = "SystemAssigned"
